@@ -3,8 +3,8 @@
  */
 
 //graphene类库
-import {ChainStore} from "graphenejs-lib";
-import {Apis} from "graphenejs-ws";
+import {ChainStore} from "bitsharesjs";
+import {Apis} from "bitsharesjs-ws";
 //react类
 import React from 'react';
 import {render} from 'react-dom';
@@ -52,21 +52,7 @@ let willTransitionTo = (nextState, replaceState, callback) => {
     let connectionString = SettingsStore.getSetting("apiServer");
 
     if (nextState.location.pathname === "/init-error") {
-
-        return Apis.reset(connectionString, true).init_promise
-            .then(() => {
-                var db = iDB.init_instance(window.openDatabase ? (shimIndexedDB || indexedDB) : indexedDB).init_promise;
-                return db.then(() => {
-                    return callback();
-                }).catch((err) => {
-                    console.log("err:", err);
-                    return callback();
-                });
-            }).catch((err) => {
-                console.log("err:", err);
-                return callback();
-            });
-
+        return callback();
     }
     //console.debug('Apis.instance');
     Apis.instance(connectionString, !!connect).init_promise.then(() => {
@@ -134,7 +120,7 @@ let routes = (
         <Route path="last-operate" component={LastOperationContainer}/>
         <Route path="scan" component={Scan}/>
         <Route path="transfer" component={TransferContainer}/>
-        <Route path="balance" component={BalanceWrapper}/>
+        <Route path="balance/:account" component={BalanceWrapper}/>
         <Route path="markets" components={MarketListContainer}/>
     </Route>
 );

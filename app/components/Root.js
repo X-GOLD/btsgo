@@ -5,8 +5,8 @@ import AccountStore from "../stores/AccountStore";
 import SettingsStore from '../stores/SettingsStore';
 import NotificationStore from "../stores/NotificationStore";
 
-import {ChainStore} from "graphenejs-lib";
-import {Apis} from "graphenejs-ws";
+import {ChainStore} from "bitsharesjs";
+import {Apis} from "bitsharesjs-ws";
 
 //组件
 import Loading from './Loading';
@@ -78,17 +78,16 @@ class Root extends React.Component {
     }
 
     render() {
-        //console.debug(this.props);
         let {disableChat, syncFail, loading} = this.state;
         let content = null;
         if (syncFail) {
             content = (
-                <Settings >
-                    <GlobalSettingContainer />
+                <Settings>
+                    <GlobalSettingContainer/>
                 </Settings>
             );
         } else if (loading) {
-            content = <Loading />;
+            content = <Loading/>;
         } else {
             content = (
                 <div className="full vertical-box">

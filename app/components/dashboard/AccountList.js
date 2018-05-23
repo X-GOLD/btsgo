@@ -9,7 +9,7 @@ import ChainTypes from "../Utility/ChainTypes";
 import Immutable from "immutable";
 import TotalBalanceValue from "../Utility/TotalBalanceValue";
 import AccountStore from "../../stores/AccountStore";
-import {ChainStore} from "graphenejs-lib";
+import {ChainStore} from "bitsharesjs";
 
 
 class AccountList extends BaseComponent {
@@ -24,7 +24,8 @@ class AccountList extends BaseComponent {
 
     onItemClick(name) {
         //let acc = e.target.parentNode.childNodes[0].innerHTML;
-        this.context.router.push({pathname: '/balance', state: {account: name}});
+        //this.context.router.push({pathname: '/balance', state: {account: name}});
+        this.context.router.push(`/balance/${name}`);
     }
 
     onFilter(e) {
